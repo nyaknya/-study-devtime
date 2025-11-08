@@ -14,12 +14,15 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "@eslint-react/eslint-plugin": "^2.3.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
     "sass": "^1.93.3",
     "typescript": "^5"
   }
