@@ -86,28 +86,6 @@
   font-weight: 400;
 }
 
-/* Body Small - 14px / 18px */
-@utility body-small-b {
-  font-size: 0.875rem;
-  line-height: 18px;
-  font-weight: 700;
-}
-@utility body-small-s {
-  font-size: 0.875rem;
-  line-height: 18px;
-  font-weight: 600;
-}
-@utility body-small-m {
-  font-size: 0.875rem;
-  line-height: 18px;
-  font-weight: 500;
-}
-@utility body-small-r {
-  font-size: 0.875rem;
-  line-height: 18px;
-  font-weight: 400;
-}
-
 /* Caption - 12px / 16px */
 @utility caption-b {
   font-size: 0.75rem;
@@ -130,24 +108,24 @@
   font-weight: 400;
 }
 
-/* Label - 10px / 12px */
+/* Label - 14px / 18px */
 @utility label-b {
-  font-size: 0.625rem;
-  line-height: 12px;
+  font-size: 0.875rem;
+  line-height: 18px;
   font-weight: 700;
 }
 @utility label-s {
-  font-size: 0.625rem;
-  line-height: 12px;
+  font-size: 0.875rem;
+  line-height: 18px;
   font-weight: 600;
 }
 @utility label-m {
-  font-size: 0.625rem;
-  line-height: 12px;
+  font-size: 0.875rem;
+  line-height: 18px;
   font-weight: 500;
 }
 @utility label-r {
-  font-size: 0.625rem;
-  line-height: 12px;
+  font-size: 0.875rem;
+  line-height: 18px;
   font-weight: 400;
 }
