@@ -1,16 +1,18 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
-type ButtonType = 'primary' | 'secondary' | 'tertiary';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
-  type: ButtonType;
+  variant: ButtonVariant;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  fullWidth?: boolean;
   disabled?: boolean;
 }
 
-const variantStyles: Record<ButtonType, string> = {
+const variantStyles: Record<ButtonVariant, string> = {
   primary:
     'bg-primary text-white hover:bg-[color-mix(in_srgb,var(--color-primary)_90%,black)] disabled:bg-gray-400 disabled:text-gray-300',
   secondary:
@@ -22,17 +24,20 @@ const variantStyles: Record<ButtonType, string> = {
 export default function Button({
   children,
   onClick,
-  type,
+  type = 'button',
+  variant,
+  fullWidth = false,
   disabled,
 }: ButtonProps) {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        'subtitle-s rounded-[5px] px-4 py-3 cursor-pointer outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] inline-flex h-12 transition-colors duration-200 disabled:cursor-not-allowed',
-        variantStyles[type],
+        'subtitle-s rounded-[5px] px-4 py-3 cursor-pointer outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] flex h-12 justify-center transition-colors disabled:cursor-not-allowed',
+        fullWidth ? 'w-full' : 'w-auto',
+        variantStyles[variant],
       )}
     >
       {children}

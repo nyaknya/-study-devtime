@@ -7,13 +7,13 @@ export default function CommonPage() {
     <>
       <h2>공통 컴포넌트 모음</h2>
       <div className="flex gap-2.5 p-10">
-        <Button onClick={() => {}} type="primary">
+        <Button onClick={() => {}} variant="primary">
           Button
         </Button>
-        <Button onClick={() => {}} type="secondary">
+        <Button onClick={() => {}} variant="secondary">
           Button
         </Button>
-        <Button onClick={() => {}} type="tertiary">
+        <Button onClick={() => {}} variant="tertiary">
           Button
         </Button>
       </div>
