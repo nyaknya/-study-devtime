@@ -9,13 +9,14 @@ import CheckIcon from '@/assets/icons/check.svg';
 import { TERMS_OF_SERVICE } from '@/constants/terms';
 
 export default function SignupPage() {
-  // 체크박스 구현용 임시 state. 향후 form데이터가 들어올 예정
   const [formData, setFormData] = useState({
     email: '',
     nickname: '',
     password: '',
     confirmPassword: '',
   });
+
+  console.log(formData);
 
   const [isTermsAgreed, setIsTermsAgreed] = useState(false);
 
@@ -33,6 +34,8 @@ export default function SignupPage() {
             label="아이디"
             id="username"
             placeholder="이메일 주소를 입력해 주세요."
+            value={formData.email}
+            onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
             className="mb-9"
           >
             <Button variant="secondary" textStyle="label-s">
@@ -44,6 +47,8 @@ export default function SignupPage() {
             label="닉네임"
             id="nickname"
             placeholder="닉네임을 입력해 주세요."
+            value={formData.nickname}
+            onChange={(e) => setFormData((prev) => ({ ...prev, nickname: e.target.value }))}
             className="mb-9"
           >
             <Button variant="secondary" textStyle="label-s">
@@ -56,6 +61,8 @@ export default function SignupPage() {
             id="password"
             type="password"
             placeholder="비밀번호를 입력해 주세요."
+            value={formData.password}
+            onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
             className="mb-12"
           />
 
@@ -64,6 +71,8 @@ export default function SignupPage() {
             id="passwordConfirm"
             type="password"
             placeholder="비밀번호를 다시 입력해 주세요."
+            value={formData.confirmPassword}
+            onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
             className="mb-12"
           />
 
