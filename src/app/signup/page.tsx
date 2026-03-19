@@ -2,6 +2,7 @@
 
 import VerticalLogoWhite from '@/assets/images/logo-vertical-white.svg';
 import Button from '@/components/Button';
+import FormField from '@/components/FormField';
 import Link from 'next/link';
 import { useState } from 'react';
 import CheckIcon from '@/assets/icons/check.svg';
@@ -28,63 +29,43 @@ export default function SignupPage() {
         <h2 className="title-b text-primary mb-9">회원가입</h2>
 
         <form className="flex flex-col max-w-105 w-full">
-          <div className="flex flex-col gap-2 mb-9">
-            <label htmlFor="username" className="label-m text-gray-600">
-              아이디
-            </label>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                id="username"
-                placeholder="이메일 주소를 입력해 주세요."
-                className="px-4 py-3 flex-1 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300 focus:text-gray-800 [&:not(:placeholder-shown):not(:focus)]:text-gray-600"
-              />
-              <Button variant="secondary" textStyle="label-s">
-                중복 확인
-              </Button>
-            </div>
-          </div>
+          <FormField
+            label="아이디"
+            id="username"
+            placeholder="이메일 주소를 입력해 주세요."
+            className="mb-9"
+          >
+            <Button variant="secondary" textStyle="label-s">
+              중복 확인
+            </Button>
+          </FormField>
 
-          <div className="flex flex-col gap-2 mb-9">
-            <label htmlFor="nickname" className="label-m text-gray-600">
-              닉네임
-            </label>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                id="nickname"
-                placeholder="닉네임을 입력해 주세요."
-                className="px-4 py-3 flex-1 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300 focus:text-gray-800 [&:not(:placeholder-shown):not(:focus)]:text-gray-600"
-              />
-              <Button variant="secondary" textStyle="label-s">
-                중복 확인
-              </Button>
-            </div>
-          </div>
+          <FormField
+            label="닉네임"
+            id="nickname"
+            placeholder="닉네임을 입력해 주세요."
+            className="mb-9"
+          >
+            <Button variant="secondary" textStyle="label-s">
+              중복 확인
+            </Button>
+          </FormField>
 
-          <div className="flex flex-col gap-2 mb-12">
-            <label htmlFor="password" className="label-m text-gray-600">
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="비밀번호를 입력해 주세요."
-              className="px-4 py-3 flex-1 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300"
-            />
-          </div>
+          <FormField
+            label="비밀번호"
+            id="password"
+            type="password"
+            placeholder="비밀번호를 입력해 주세요."
+            className="mb-12"
+          />
 
-          <div className="flex flex-col gap-2 mb-12">
-            <label htmlFor="passwordConfirm" className="label-m text-gray-600">
-              비밀번호 확인
-            </label>
-            <input
-              type="password"
-              id="passwordConfirm"
-              placeholder="비밀번호를 다시 입력해 주세요."
-              className="px-4 py-3 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300"
-            />
-          </div>
+          <FormField
+            label="비밀번호 확인"
+            id="passwordConfirm"
+            type="password"
+            placeholder="비밀번호를 다시 입력해 주세요."
+            className="mb-12"
+          />
 
           <div className="flex flex-col gap-2 mb-9">
             <div className="flex justify-between">

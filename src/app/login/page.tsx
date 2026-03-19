@@ -3,6 +3,7 @@
 import VerticalLogo from '@/assets/images/logo-vertical.svg';
 import SymbolLogo from '@/assets/images/logo-symbol.svg';
 import Button from '@/components/Button';
+import FormField from '@/components/FormField';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -26,31 +27,20 @@ export default function LoginPage() {
         />
 
         <form className="flex flex-col">
-          <div className="flex flex-col gap-2 mb-9">
-            <label htmlFor="username" className="label-m text-gray-600">
-              아이디
-            </label>
-            <input
-              type="text"
-              id="username"
-              placeholder="이메일 주소를 입력해 주세요."
-              className="px-4 py-3 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300 focus:text-gray-800 [&:not(:placeholder-shown):not(:focus)]:text-gray-600"
-            />
-            {/* 헬퍼텍스트 바리에이션 별로 스타일 구분 필요(색상) */}
-            {/* <span className="caption-m">헬퍼 텍스트</span> */}
-          </div>
+          <FormField
+            label="아이디"
+            id="username"
+            placeholder="이메일 주소를 입력해 주세요."
+            className="mb-9"
+          />
 
-          <div className="flex flex-col gap-2 mb-12">
-            <label htmlFor="password" className="label-m text-gray-600">
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="비밀번호를 입력해 주세요."
-              className="px-4 py-3 bg-gray-50 rounded-[5px] outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] placeholder:text-gray-300"
-            />
-          </div>
+          <FormField
+            label="비밀번호"
+            id="password"
+            type="password"
+            placeholder="비밀번호를 입력해 주세요."
+            className="mb-12"
+          />
           {/* TODO: disabled 설정 필요 */}
           <Button type="submit" variant="primary" fullWidth>
             로그인
