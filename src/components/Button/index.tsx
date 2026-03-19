@@ -1,3 +1,4 @@
+import { TypographyStyleType } from '@/types/typography';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
@@ -9,6 +10,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
   fullWidth?: boolean;
+  textStyle?: TypographyStyleType;
   disabled?: boolean;
 }
 
@@ -27,6 +29,7 @@ export default function Button({
   type = 'button',
   variant,
   fullWidth = false,
+  textStyle = 'subtitle-s',
   disabled,
 }: ButtonProps) {
   return (
@@ -35,8 +38,9 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        'subtitle-s rounded-[5px] px-4 py-3 cursor-pointer outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] flex h-12 justify-center transition-colors disabled:cursor-not-allowed',
+        'rounded-[5px] px-4 py-3 cursor-pointer outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)] flex h-12 justify-center items-center transition-colors disabled:cursor-not-allowed',
         fullWidth ? 'w-full' : 'w-auto',
+        textStyle,
         variantStyles[variant],
       )}
     >

@@ -58,7 +58,7 @@ export default function LoginPage() {
 
           <Link
             href="/signup"
-            className="text-center text-primary label-m pt-6"
+            className="text-center text-primary body-m pt-6"
           >
             회원가입
           </Link>
