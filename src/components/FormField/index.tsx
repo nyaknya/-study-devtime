@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 interface FormFieldProps {
   label: string;
   id: string;
+  name?: string;
   type?: 'text' | 'password' | 'email';
   placeholder?: string;
   value?: string;
@@ -16,6 +17,7 @@ interface FormFieldProps {
 export default function FormField({
   label,
   id,
+  name,
   type = 'text',
   placeholder,
   value,
@@ -34,6 +36,7 @@ export default function FormField({
         <div className="flex gap-3">
           <input
             id={id}
+            name={name}
             type={type}
             placeholder={placeholder}
             value={value}

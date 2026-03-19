@@ -16,7 +16,10 @@ export default function SignupPage() {
     confirmPassword: '',
   });
 
-  console.log(formData);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const [isTermsAgreed, setIsTermsAgreed] = useState(false);
 
@@ -33,9 +36,10 @@ export default function SignupPage() {
           <FormField
             label="아이디"
             id="username"
+            name="email"
             placeholder="이메일 주소를 입력해 주세요."
             value={formData.email}
-            onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+            onChange={handleChange}
             className="mb-9"
           >
             <Button variant="secondary" textStyle="label-s">
@@ -46,9 +50,10 @@ export default function SignupPage() {
           <FormField
             label="닉네임"
             id="nickname"
+            name="nickname"
             placeholder="닉네임을 입력해 주세요."
             value={formData.nickname}
-            onChange={(e) => setFormData((prev) => ({ ...prev, nickname: e.target.value }))}
+            onChange={handleChange}
             className="mb-9"
           >
             <Button variant="secondary" textStyle="label-s">
@@ -59,20 +64,22 @@ export default function SignupPage() {
           <FormField
             label="비밀번호"
             id="password"
+            name="password"
             type="password"
             placeholder="비밀번호를 입력해 주세요."
             value={formData.password}
-            onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
+            onChange={handleChange}
             className="mb-12"
           />
 
           <FormField
             label="비밀번호 확인"
             id="passwordConfirm"
+            name="confirmPassword"
             type="password"
             placeholder="비밀번호를 다시 입력해 주세요."
             value={formData.confirmPassword}
-            onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+            onChange={handleChange}
             className="mb-12"
           />
 
