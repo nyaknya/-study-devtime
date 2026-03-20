@@ -4,24 +4,27 @@ import VerticalLogoWhite from '@/assets/images/logo-vertical-white.svg';
 import Button from '@/components/Button';
 import FormField from '@/components/FormField';
 import Link from 'next/link';
-import { useState } from 'react';
 import CheckIcon from '@/assets/icons/check.svg';
 import { TERMS_OF_SERVICE } from '@/constants/terms';
+import { useSignupForm } from '@/features/auth/useSignupForm';
 
 export default function SignupPage() {
-  const [formData, setFormData] = useState({
-    email: '',
-    nickname: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const [isTermsAgreed, setIsTermsAgreed] = useState(false);
+  const {
+    formData,
+    handleChange,
+    isTermsAgreed,
+    setIsTermsAgreed,
+    emailHelper,
+    nicknameHelper,
+    handleEmailBlur,
+    handleNicknameBlur,
+    handlePasswordBlur,
+    handleConfirmPasswordBlur,
+    checkEmail,
+    checkNickname,
+    validationErrors,
+    isSubmitEnabled,
+  } = useSignupForm();
 
   return (
     <div className="max-h-screen flex">
@@ -40,9 +43,11 @@ export default function SignupPage() {
             placeholder="이메일 주소를 입력해 주세요."
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleEmailBlur}
             className="mb-9"
+            helper={emailHelper}
           >
-            <Button variant="secondary" textStyle="label-s">
+            <Button type="button" variant="secondary" textStyle="label-s" onClick={checkEmail}>
               중복 확인
             </Button>
           </FormField>
@@ -54,9 +59,11 @@ export default function SignupPage() {
             placeholder="닉네임을 입력해 주세요."
             value={formData.nickname}
             onChange={handleChange}
+            onBlur={handleNicknameBlur}
             className="mb-9"
+            helper={nicknameHelper}
           >
-            <Button variant="secondary" textStyle="label-s">
+            <Button type="button" variant="secondary" textStyle="label-s" onClick={checkNickname}>
               중복 확인
             </Button>
           </FormField>
@@ -69,7 +76,9 @@ export default function SignupPage() {
             placeholder="비밀번호를 입력해 주세요."
             value={formData.password}
             onChange={handleChange}
+            onBlur={handlePasswordBlur}
             className="mb-12"
+            helper={validationErrors.password ? { text: validationErrors.password, type: 'error' } : undefined}
           />
 
           <FormField
@@ -80,14 +89,19 @@ export default function SignupPage() {
             placeholder="비밀번호를 다시 입력해 주세요."
             value={formData.confirmPassword}
             onChange={handleChange}
+            onBlur={handleConfirmPasswordBlur}
             className="mb-12"
+            helper={validationErrors.confirmPassword ? { text: validationErrors.confirmPassword, type: 'error' } : undefined}
           />
 
           <div className="flex flex-col gap-2 mb-9">
             <div className="flex justify-between">
               <span className="label-m text-gray-600">이용약관</span>
               <div className="flex items-center gap-1.25">
-                <label htmlFor="terms" className={`label-m ${isTermsAgreed ? 'text-primary' : 'text-primary-30'}`}>
+                <label
+                  htmlFor="terms"
+                  className={`label-m ${isTermsAgreed ? 'text-primary' : 'text-primary-30'}`}
+                >
                   동의함
                 </label>
                 <div className="relative size-4">
@@ -108,20 +122,17 @@ export default function SignupPage() {
               {TERMS_OF_SERVICE.map((item) => (
                 <div key={item.title}>
                   <p className="caption-b text-gray-600">{item.title}</p>
-                  <p className="caption-r text-gray-600 whitespace-pre-wrap">
-                    {item.content}
-                  </p>
+                  <p className="caption-r text-gray-600 whitespace-pre-wrap">{item.content}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* TODO: disabled 설정 필요 */}
-          <Button type="submit" variant="primary" fullWidth>
+          <Button type="submit" variant="primary" fullWidth disabled={!isSubmitEnabled}>
             회원가입
           </Button>
 
-          <Link href="/signup" className="text-center text-primary body-m pt-6">
+          <Link href="/login" className="text-center text-primary body-m pt-6">
             회원이신가요? <b>로그인 바로가기</b>
           </Link>
         </form>

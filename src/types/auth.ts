@@ -9,3 +9,15 @@ export type SignupResponse = {
   success: boolean;
   message: string;
 };
+
+export type CheckEmailResponse = {
+  success: boolean;
+  available: boolean;
+  message: string;
+};
+
+export type CheckNicknameResponse = {
+  success: boolean;
+  available: boolean;
+  message: string;
+};

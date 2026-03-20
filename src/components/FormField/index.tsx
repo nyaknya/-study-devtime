@@ -8,8 +8,8 @@ interface FormFieldProps {
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  helperText?: string;
-  helperType?: 'success' | 'error';
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  helper?: { text?: string; type?: 'success' | 'error' };
   className?: string;
   children?: ReactNode;
 }
@@ -22,8 +22,8 @@ export default function FormField({
   placeholder,
   value,
   onChange,
-  helperText,
-  helperType,
+  onBlur,
+  helper,
   className,
   children,
 }: FormFieldProps) {
@@ -41,13 +41,14 @@ export default function FormField({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            className={`px-4 py-3 flex-1 bg-gray-50 rounded-[5px] outline-none placeholder:text-gray-300 focus:text-gray-800 [&:not(:placeholder-shown):not(:focus)]:text-gray-600 focus:[outline:1.5px_solid_var(--color-fuchsia)] ${helperType === 'error' ? '[outline:1.5px_solid_var(--color-negative)]' : ''}`}
+            onBlur={onBlur}
+            className={`px-4 py-3 flex-1 bg-gray-50 rounded-[5px] placeholder:text-gray-300 focus:text-gray-800 [&:not(:placeholder-shown):not(:focus)]:text-gray-600 ${helper?.type === 'error' ? '[outline:1.5px_solid_var(--color-negative)]' : 'outline-none focus:[outline:1.5px_solid_var(--color-fuchsia)]'}`}
           />
           {children}
         </div>
-        {helperText && (
-          <p className={`absolute top-full mt-2 caption-m ${helperType === 'success' ? 'text-positive' : 'text-negative'}`}>
-            {helperText}
+        {helper?.text && (
+          <p className={`absolute top-full mt-2 caption-m ${helper.type === 'success' ? 'text-positive' : 'text-negative'}`}>
+            {helper.text}
           </p>
         )}
       </div>
