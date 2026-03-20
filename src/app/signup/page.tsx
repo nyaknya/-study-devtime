@@ -16,14 +16,12 @@ export default function SignupPage() {
     setIsTermsAgreed,
     emailHelper,
     nicknameHelper,
-    handleEmailBlur,
-    handleNicknameBlur,
-    handlePasswordBlur,
-    handleConfirmPasswordBlur,
+    handleBlur,
     checkEmail,
     checkNickname,
     validationErrors,
     isSubmitEnabled,
+    handleSubmit,
   } = useSignupForm();
 
   return (
@@ -35,7 +33,7 @@ export default function SignupPage() {
       <div className="min-h-screen w-1/2 flex flex-col items-center justify-center">
         <h2 className="title-b text-primary mb-9">회원가입</h2>
 
-        <form className="flex flex-col max-w-105 w-full">
+        <form className="flex flex-col max-w-105 w-full" onSubmit={handleSubmit}>
           <FormField
             label="아이디"
             id="username"
@@ -43,7 +41,7 @@ export default function SignupPage() {
             placeholder="이메일 주소를 입력해 주세요."
             value={formData.email}
             onChange={handleChange}
-            onBlur={handleEmailBlur}
+            onBlur={handleBlur}
             className="mb-9"
             helper={emailHelper}
           >
@@ -59,7 +57,7 @@ export default function SignupPage() {
             placeholder="닉네임을 입력해 주세요."
             value={formData.nickname}
             onChange={handleChange}
-            onBlur={handleNicknameBlur}
+            onBlur={handleBlur}
             className="mb-9"
             helper={nicknameHelper}
           >
@@ -76,7 +74,7 @@ export default function SignupPage() {
             placeholder="비밀번호를 입력해 주세요."
             value={formData.password}
             onChange={handleChange}
-            onBlur={handlePasswordBlur}
+            onBlur={handleBlur}
             className="mb-12"
             helper={validationErrors.password ? { text: validationErrors.password, type: 'error' } : undefined}
           />
@@ -89,7 +87,7 @@ export default function SignupPage() {
             placeholder="비밀번호를 다시 입력해 주세요."
             value={formData.confirmPassword}
             onChange={handleChange}
-            onBlur={handleConfirmPasswordBlur}
+            onBlur={handleBlur}
             className="mb-12"
             helper={validationErrors.confirmPassword ? { text: validationErrors.confirmPassword, type: 'error' } : undefined}
           />

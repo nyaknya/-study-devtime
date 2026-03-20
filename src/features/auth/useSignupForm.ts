@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { checkEmail as checkEmailApi, checkNickname as checkNicknameApi } from '@/services/auth';
+import { checkEmail as checkEmailApi, checkNickname as checkNicknameApi, signup } from '@/services/auth';
 import { validateEmail, validateNickname, validatePassword, validateConfirmPassword } from '@/utils/validation';
 import type { AxiosError } from 'axios';
 
@@ -19,6 +20,7 @@ const getDuplicateHelper = (
 };
 
 export const useSignupForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     nickname: '',
@@ -53,10 +55,24 @@ export const useSignupForm = () => {
     isError: isNicknameTaken,
   } = useMutation({ mutationFn: checkNicknameApi });
 
-  const handleEmailBlur = () => setFieldError('email', validateEmail(formData.email));
-  const handleNicknameBlur = () => setFieldError('nickname', validateNickname(formData.nickname));
-  const handlePasswordBlur = () => setFieldError('password', validatePassword(formData.password));
-  const handleConfirmPasswordBlur = () => setFieldError('confirmPassword', validateConfirmPassword(formData.password, formData.confirmPassword));
+  const { mutate: signupMutate } = useMutation({
+    mutationFn: signup,
+    onSuccess: () => {
+      router.replace('/login');
+    },
+  });
+
+  const validators: Record<string, () => string | undefined> = {
+    email: () => validateEmail(formData.email),
+    nickname: () => validateNickname(formData.nickname),
+    password: () => validatePassword(formData.password),
+    confirmPassword: () => validateConfirmPassword(formData.password, formData.confirmPassword),
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    setFieldError(name, validators[name]?.());
+  };
 
   const isSubmitEnabled =
     !Object.values(validationErrors).some(Boolean) &&
@@ -84,12 +100,13 @@ export const useSignupForm = () => {
     validationErrors,
     emailHelper,
     nicknameHelper,
-    handleEmailBlur,
-    handleNicknameBlur,
-    handlePasswordBlur,
-    handleConfirmPasswordBlur,
+    handleBlur,
     isSubmitEnabled,
     checkEmail: () => checkEmail(formData.email),
     checkNickname: () => checkNickname(formData.nickname),
+    handleSubmit: (e: React.FormEvent) => {
+      e.preventDefault();
+      signupMutate(formData);
+    },
   };
 };

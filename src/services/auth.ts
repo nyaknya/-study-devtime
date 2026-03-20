@@ -8,4 +8,4 @@ export const checkNickname = (nickname: string) =>
   axiosInstance.get<CheckNicknameResponse>('/api/signup/check-nickname', { params: { nickname } }).then(res => res.data);
 
 export const signup = (data: SignupRequest) =>
-  axiosInstance.post<SignupResponse>('/api/signup', data);
+  axiosInstance.post<SignupResponse>('/api/signup', data).then(res => res.data);
